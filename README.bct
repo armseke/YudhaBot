@@ -1,0 +1,62 @@
+# YudhaBot
+BOT PROTECT CREATOR & ADMIN & 5 BOT + 1 GHOST.
+------
+GET TOKEN :
+------
+- `Google Chrome`
+- `http://www.tanaka.co.id:6969`
+- `Bot Alphat : https://github.com/wirayudpratama`
+-
+Cara Install Bot Yudha :
+------
+Di C9 :
+- Ketik -> `sudo apt-get update`
+- Ketik -> `sudo apt-get install git`
+- Ketik -> `sudo apt-get install python-sofware-properties`
+- Ketik -> `sudo pip install rsa`
+- Ketik -> `sudo pip install thrift==0.9.3`
+- Ketik -> `sudo pip install requests`
+- Ketik -> `sudo pip install requests==2.5.3`
+- Ketik -> `sudo pip install bs4`
+- Ketik -> `sudo pip install gtts`
+- Ketik -> `sudo pip install googletrans`
+- Ketik -> `sudo pip install instagram`
+- Ketik -> `sudo pip install youtube`
+- Ketik -> `git clone https://github.com/wirayudpratama/YudhaBot`
+- Ketik -> `cd Yudha`
+- Ketik -> `python yudhaself.py`
+
+Di Termux :
+- Ketik -> `pkg update`
+- Ketik -> `pkg install git`
+- Ketik -> `pkg install python2`
+- Ketik -> `pip2 install rsa`
+- Ketik -> `pip2 install thrift==0.9.3`
+- Ketik -> `pip2 install requests`
+- Ketik -> `pip2 install bs4`
+- Ketik -> `pip2 install gtts`
+- Ketik -> `pip2 install googletrans`
+- Ketik -> `git clone https://github.com/wirayudpratama/YudhaBot`
+- Ketik -> `cd yudha`
+- Ketik -> `python2 yudhaself.py`
+
+Cara Menjalankan Bot Kembali :
+------
+Di C9 :
+- Ketik -> `cd Yudha`
+- Ketik -> `python Yudhaself.py`
+
+Di Termux :
+- Ketik -> `cd Yudha`
+- Ketik -> `python2 Yudhaself.py`
+
+
+Credit By@ M.WiraYudhaPratama
+------
+- `Follow My Instagram : yud.zz`
+- `Add My ID LINE : iniyud`
+
+Thx To :
+------
+- `LINE-TCR TEAM`
+

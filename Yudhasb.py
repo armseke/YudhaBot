@@ -591,7 +591,7 @@ def bot(op):
                         nadya.leaveGroup(op.param1)                        
 		    else:
                         nadya.acceptGroupInvitation(op.param1)
-			nadya.sendText(op.param1,"☆Ketik ☞Help☜ Untuk Bantuan☆\n☆Harap Gunakan Dengan Bijak ^_^ ☆")
+			nadya.sendText(op.param1,"Hai")
                         		    
  
 	    if mid in op.param3:
@@ -601,7 +601,7 @@ def bot(op):
                         nadya.rejectGroupInvitation(op.param1)
 		    else:
                         nadya.acceptGroupInvitation(op.param1)
-			nadya.sendText(op.param1,"☆Ketik ☞Help☜ Untuk Bantuan☆\n☆Harap Gunakan Dengan Bijak ^_^ ☆")
+			nadya.sendText(op.param1,"Hai")
 	    else:
                 if wait["AutoCancel"] == True:
 		    if op.param3 in Bots:

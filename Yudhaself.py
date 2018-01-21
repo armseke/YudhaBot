@@ -3388,14 +3388,14 @@ def bot(op):
            if wait["Wc"] == True:
                if op.param2 in Bots:
                  return
-            ginfo = kr.getGroup(op.param1)
-            contact = kr.getContact(op.param2)
-            image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
-            c = Message(to=op.param1, from_=None, text=None, contentType=13)
-            c.contentMetadata={'mid':op.param2}
-            kr.sendText(op.param1,"Hallo " + cl.getContact(op.param2).displayName + "\nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nSemoga Betah Disini ^_^")
-            kr.sendMessage(c)
-            kr.sendImageWithURL(op.param1,image)
+               ginfo = kr.getGroup(op.param1)
+               contact = kr.getContact(op.param2)
+               image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
+               c = Message(to=op.param1, from_=None, text=None, contentType=13)
+               c.contentMetadata={'mid':op.param2}
+               kr.sendText(op.param1,"Hallo " + kr.getContact(op.param2).displayName + "\nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nSemoga Betah Disini ^_^")
+               kr.sendMessage(c)
+               kr.sendImageWithURL(op.param1,image)
                #print "MEMBER HAS JOIN THE GROUP"
         if op.type == 15:
             if wait["Lv"] == True:

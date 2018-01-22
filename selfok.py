@@ -15,7 +15,7 @@ from googletrans import Translator
 
 kr = yuda.LINE()
 #kr.login(qr=True)
-kr.login(token='EovX79Dxozuegn0bUrnd.VFsqIWyZfTEMtoQEakXbJq.PtESLY1Xrg7WfzXpbcC+BsNX81E806EJ89Zlh40di8A=')#chery
+kr.login(token='isi token mu')#chery
 kr.loginResult()
 
 print "╔═════════════════════════\n║╔════════════════════════\n║╠❂➣ SELF BERHASIL LOGIN\n║╚════════════════════════\n╚═════════════════════════"
@@ -55,7 +55,7 @@ helpmsg ="""╔════════════
 ║╠❂➣id@en
 ║╠❂➣en@id
 ║╠❂➣id@jp
-║╠❂➣?yudbot
+║╠❂➣Help bot
 ║╚═══════════
 ╚════════════"""
 
@@ -65,11 +65,11 @@ keymsg ="""╔════════════
 ║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
 ╠════════════
 ║╔═══════════
-║╠❂➣?yudpro
-║╠❂➣?yudself
-║╠❂➣?yudgrup
-║╠❂➣?yudset
-║╠❂➣?yudtran
+║╠❂➣Help pro
+║╠❂➣Help self
+║╠❂➣Help grup
+║╠❂➣Help set
+║╠❂➣Help tran
 ║╠❂➣mode on/off
 ║╚═══════════
 ╚════════════"""
@@ -749,7 +749,7 @@ def bot(op):
                      contact = kr.getContact(msg.from_)
                      cName = contact.displayName
                      balas = ["Dont Tag Me!! Im Busy, ",cName + " Ngapain Ngetag?, ",cName + " Nggak Usah Tag-Tag! Kalo Penting Langsung Pc Aja, ", "-_-, ","Kris lagi off, ", cName + " Kenapa Tag saya?, ","SPAM PC aja, " + cName, "Jangan Suka Tag gua, " + cName, "Kamu siapa, " + cName + "?", "Ada Perlu apa, " + cName + "?","Tag doang tidak perlu., "]
-                     ret_ = "[Auto Respond] " + random.choice(balas)
+                     ret_ = "[Auto Respond Kick] " + random.choice(balas)
                      name = re.findall(r'@(\w+)', msg.text)
                      mention = ast.literal_eval(msg.contentMetadata["MENTION"])
                      mentionees = mention['MENTIONEES']
@@ -886,37 +886,37 @@ def bot(op):
                     kr.sendText(msg.to,msg.text)
             elif msg.text is None:
                 return
-            elif msg.text.lower() == '!yud':
+            elif msg.text.lower() == 'Help':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helpmsg)
                 else:
                     kr.sendText(msg.to,helpmsg)
-            elif msg.text.lower() == '!yudbot':
+            elif msg.text.lower() == 'Help bot':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,keymsg)
                 else:
                     kr.sendText(msg.to,keymsg)
-            elif msg.text.lower() == '!yudpro':
+            elif msg.text.lower() == 'Help pro':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helppro)
                 else:
                     kr.sendText(msg.to,helppro)
-            elif msg.text.lower() == '!yudself':
+            elif msg.text.lower() == 'Help self':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helpself)
                 else:
                     kr.sendText(msg.to,helpself)
-            elif msg.text.lower() == '!yudgrup':
+            elif msg.text.lower() == 'Help grup':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helpgrup)
                 else:
                     kr.sendText(msg.to,helpgrup)
-            elif msg.text.lower() == '!yudset':
+            elif msg.text.lower() == ''Help set':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helpset)
                 else:
                     kr.sendText(msg.to,helpset)
-            elif msg.text.lower() == '!yudtran':
+            elif msg.text.lower() == 'Help tran':
                 if wait["lang"] == "JP":
                     kr.sendText(msg.to,helptranslate)
                 else:

@@ -7,234 +7,223 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from threading import Thread
 from googletrans import Translator
-#from gtts import gTTS
+from gtts import gTTS
 import time,random,sys,json,codecs,threading,glob,urllib,urllib2,urllib3,re,ast,os,subprocess,requests,tempfile
 
 nadya = yuda.LINE()
 #nadya.login(qr=True)
 nadya.login(token='isi token mu')
 nadya.loginResult()
-print "Yudha-Login Success\n\n=====[Sukses Login]====="
+print "=====[Sukses Login]====="
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-selfMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Hi〙
-║╠❂➣〘Me〙
-║╠❂➣〘Mymid〙
-║╠❂➣〘Mid @〙
-║╠❂➣〘SearchID: (ID LINE)〙
-║╠❂➣〘Checkdate (DD/MM/YY)〙
-║╠❂➣〘Kalender〙
-║╠❂➣〘Steal contact〙
-║╠❂➣〘Pp @〙
-║╠❂➣〘Cover @〙
-║╠❂➣〘Auto like〙
-║╠❂➣〘Scbc Text〙
-║╠❂➣〘Cbc Text〙
-║╠❂➣〘Gbc Text〙
-║╠❂➣〘Getbio @〙
-║╠❂➣〘Getinfo @〙
-║╠❂➣〘Getname @〙
-║╠❂➣〘Getprofile @〙
-║╠❂➣〘Getcontact @〙
-║╠❂➣〘Getvid @〙
-║╠❂➣〘Friendlist〙 
-╚════════════
+selfMessage ="""
+╔═════════════════
+║            ☆☞ S E L F ☜☆
+╠═════════════════
+╠➩〘Hi〙
+╠➩〘Me〙
+╠➩〘Mymid〙
+╠➩〘Mid @〙
+╠➩〘SearchID: (ID LINE)〙
+╠➩〘Searchmid: (Mid)〙
+╠➩〘Checkdate (DD/MM/YY)〙
+╠➩〘Kalender〙
+╠➩〘Steal contact〙
+╠➩〘Pp @〙
+╠➩〘Cover @〙
+╠➩〘Auto like〙
+╠➩〘Scbc Text〙
+╠➩〘Cbc Text〙
+╠➩〘Gbc Text〙
+╠➩〘Getbio @〙
+╠➩〘Getinfo @〙
+╠➩〘Getname @〙
+╠➩〘Getprofile @〙
+╠➩〘Getcontact @〙
+╠➩〘Getvid @〙
+╠➩〘Friendlist〙
+╠➩〘Micadd @〙
+╠➩〘Micdel @〙
+╠➩〘Miclist〙
+╚═════════════════
 """
 
-botMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Absen〙
-║╠❂➣〘Respon〙
-║╠❂➣〘Runtime〙
-║╠❂➣〘Mycopy @〙
-║╠❂➣〘Mybackup〙
-║╠❂➣〘Mybio (Text)〙
-║╠❂➣〘Myname (Text)〙
-║╠❂➣〘@bye〙
-╚════════════
+botMessage ="""
+╔═════════════════
+║             ☆☞ B O T ☜☆
+╠═════════════════
+╠➩〘Absen〙
+╠➩〘Respon〙
+╠➩〘Runtime〙
+╠➩〘Mycopy @〙
+╠➩〘Copycontact〙
+╠➩〘Mybackup〙
+╠➩〘Mybio (Text)〙
+╠➩〘Myname (Text)〙
+╠➩〘@bye〙
+╠➩〘Bot on/off〙
+╚═════════════════
 """
 
-mediaMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Gift〙
-║╠❂➣〘Gift1 @ s/d Gift10 @〙
-║╠❂➣〘Giftbycontact〙
-║╠❂➣〘Gif gore〙
-║╠❂➣〘Google: (Text)〙
-║╠❂➣〘Playstore NamaApp〙
-║╠❂➣〘Fancytext: Text〙
-║╠❂➣〘/musik Judul-Penyanyi〙
-║╠❂➣〘/lirik Judul-Penyanyi〙
-║╠❂➣〘/musrik Judul-Penyanyi〙
-║╠❂➣〘/ig UrsnameInstagram〙
-║╠❂➣〘Checkig UrsnameInstagram〙
-║╠❂➣〘/apakah Text (Kerang Ajaib)〙
-║╠❂➣〘/kapan Text (Kerang Ajaib)〙
-║╠❂➣〘/hari Text (Kerang Ajaib)〙
-║╠❂➣〘/berapa Text (Kerang Ajaib)〙
-║╠❂➣〘/berapakah Text〙
-║╠❂➣〘Youtubelink: Judul Video〙
-║╠❂➣〘Youtubevideo: Judul Video〙
-║╠❂➣〘Youtubesearch: Judul Video〙
-║╠❂➣〘Image NamaGambar〙
-║╠❂➣〘Say-id Text〙
-║╠❂➣〘Say-en Text〙
-║╠❂➣〘Say-jp Text〙
-║╠❂➣〘Image NamaGambar〙
-║╠❂➣〘Tr-id Text (Translate En Ke ID〙
-║╠❂➣〘Tr-en Text (Translate ID Ke En〙
-║╠❂➣〘Tr-th Text (Translate ID Ke Th〙
-║╠❂➣〘Id@en Text (Translate ID Ke En〙
-║╠❂➣〘Id@th Text (Translate ID Ke TH〙
-║╠❂➣〘En@id Text (Translate En Ke ID〙
-╚════════════
+mediaMessage ="""
+╔═════════════════
+║           ☆☞ M E D I A ☜☆
+╠═════════════════
+╠➩〘Gift〙
+╠➩〘Gift1 @ s/d Gift10 @〙
+╠➩〘Giftbycontact〙
+╠➩〘Gif gore〙
+╠➩〘Google: (Text)〙
+╠➩〘Playstore NamaApp〙
+╠➩〘Fancytext: Text〙
+╠➩〘/musik Judul-Penyanyi〙
+╠➩〘/lirik Judul-Penyanyi〙
+╠➩〘/musrik Judul-Penyanyi〙
+╠➩〘/ig UrsnameInstagram〙
+╠➩〘Checkig UrsnameInstagram〙
+╠➩〘/apakah Text (Kerang Ajaib)〙
+╠➩〘/kapan Text (Kerang Ajaib)〙
+╠➩〘/hari Text (Kerang Ajaib)〙
+╠➩〘/berapa Text (Kerang Ajaib)〙
+╠➩〘/berapakah Text〙
+╠➩〘Youtubelink: Judul Video〙
+╠➩〘Youtubevideo: Judul Video〙
+╠➩〘Youtubesearch: Judul Video〙
+╠➩〘Image NamaGambar〙
+╠➩〘Say-id Text〙
+╠➩〘Say-en Text〙
+╠➩〘Say-jp Text〙
+╠➩〘Image NamaGambar〙
+╠➩〘Tr-id Text (Translate En Ke ID〙
+╠➩〘Tr-en Text (Translate ID Ke En〙
+╠➩〘Tr-th Text (Translate ID Ke Th〙
+╠➩〘Id@en Text (Translate ID Ke En〙
+╠➩〘Id@th Text (Translate ID Ke TH〙
+╠➩〘En@id Text (Translate En Ke ID〙
+╚═════════════════
 """
 
-groupMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Welcome〙
-║╠❂➣〘Say welcome〙
-║╠❂➣〘Invite creator〙
-║╠❂➣〘Setview〙
-║╠❂➣〘Viewseen〙
-║╠❂➣〘Gn: (NamaGroup)〙
-║╠❂➣〘Numpang tag〙
-║╠❂➣〘Recover〙
-║╠❂➣〘Cancel〙
-║╠❂➣〘Cancelall〙
-║╠❂➣〘Gcreator〙
-║╠❂➣〘Ginfo〙
-║╠❂➣〘Gurl〙
-║╠❂➣〘List group〙
-║╠❂➣〘Pict group: (NamaGroup)〙
-║╠❂➣〘Spam: (Text)〙
-║╠❂➣〘Add all〙
-║╠❂➣〘Kick: (Mid)〙
-║╠❂➣〘Invite: (Mid)〙
-║╠❂➣〘Invite〙
-║╠❂➣〘Memlist〙
-║╠❂➣〘Getgroup image〙
-║╠❂➣〘Urlgroup Image〙
-╚════════════
+groupMessage ="""
+╔═════════════════
+║           ☆☞ G R O U P ☜☆
+╠═════════════════
+╠➩〘Welcome〙
+╠➩〘Say welcome〙
+╠➩〘Invite creator〙
+╠➩〘Setview〙
+╠➩〘Viewseen〙
+╠➩〘Gn: (NamaGroup)〙
+╠➩〘Tag all〙
+╠➩〘Recover〙
+╠➩〘Cancel〙
+╠➩〘Cancelall〙
+╠➩〘Gcreator〙
+╠➩〘Ginfo〙
+╠➩〘Gurl〙
+╠➩〘List group〙
+╠➩〘Pict group: (NamaGroup)〙
+╠➩〘Spam: (Text)〙
+╠➩〘Add all〙
+╠➩〘Kick: (Mid)〙
+╠➩〘Invite: (Mid)〙
+╠➩〘Invite〙
+╠➩〘Memlist〙
+╠➩〘Getgroup image〙
+╠➩〘Urlgroup Image〙
+╚═════════════════
 """
 tjia="uecc57cb55f480ee2a45d81434a9b864d"
 
-setMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Sambutan on/off〙
-║╠❂➣〘Url on/off〙
-║╠❂➣〘Alwaysread on/off〙
-║╠❂➣〘Sider on/off〙
-║╠❂➣〘Contact on/off〙
-║╠❂➣〘Simisimi on/off〙
-╚════════════
+setMessage ="""
+╔═════════════════
+║              ☆☞ S E T ☜☆
+╠═════════════════
+╠➩〘Sambutan on/off〙
+╠➩〘Mimic on/off〙
+╠➩〘Url on/off〙
+╠➩〘Alwaysread on/off〙
+╠➩〘Sider on/off〙
+╠➩〘Contact on/off〙
+╠➩〘Sticker on〙
+╠➩〘Simisimi on/off〙
+╚═════════════════
 """
 
-creatorMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Admin add @〙
-║╠❂➣〘Admin remove @〙
-║╠❂➣〘Crash〙
-║╠❂➣〘Kickall〙
-║╠❂➣〘Bc: (Text)〙
-║╠❂➣〘Join group: (NamaGroup〙
-║╠❂➣〘Leave group: (NamaGroup〙
-║╠❂➣〘Leave all group〙
-║╠❂➣〘Tag on/off〙
-║╠❂➣〘Reboot〙
-║╠❂➣〘Turn off〙
-╚════════════
+creatorMessage ="""
+╔═════════════════
+║         ☆☞ C R E A T O R ☜☆
+╠═════════════════
+╠➩〘Crash〙
+╠➩〘Kickall〙
+╠➩〘Bc: (Text)〙
+╠➩〘Join group: (NamaGroup〙
+╠➩〘Leave group: (NamaGroup〙
+╠➩〘Leave all group〙
+╠➩〘Tag on/off〙
+╠➩〘Bot restart〙
+╠➩〘Turn off〙
+╚═════════════════
 """
 
-adminMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘Admin list〙
-║╠❂➣〘Allprotect on/off〙
-║╠❂➣〘Ban〙
-║╠❂➣〘Unban〙
-║╠❂➣〘Ban @〙
-║╠❂➣〘Unban @〙
-║╠❂➣〘Ban list〙
-║╠❂➣〘Clear〙
-║╠❂➣〘Kill〙
-║╠❂➣〘Kick @〙
-║╠❂➣〘Set member: (Jumblah)〙
-║╠❂➣〘Ban group: (NamaGroup〙
-║╠❂➣〘Del ban: (NamaGroup〙
-║╠❂➣〘List ban〙
-║╠❂➣〘Kill ban〙
-║╠❂➣〘Glist〙
-║╠❂➣〘Glistmid〙
-║╠❂➣〘Details group: (Gid)〙
-║╠❂➣〘Cancel invite: (Gid)〙
-║╠❂➣〘Invitemeto: (Gid)〙
-║╠❂➣〘Acc invite〙
-║╠❂➣〘Removechat〙
-║╠❂➣〘Qr on/off〙
-║╠❂➣〘Autokick on/off〙
-║╠❂➣〘Ghost on/off〙
-║╠❂➣〘Autocancel on/off〙
-║╠❂➣〘Invitepro on/off〙
-║╠❂➣〘Join on/off〙
-║╠❂➣〘Joincancel on/off〙
-║╠❂➣〘Respon on/off〙
-║╠❂➣〘Responkick on/off〙
-╚════════════
+adminMessage ="""
+╔═════════════════
+║            ☆☞ A D M I N ☜☆
+╠═════════════════
+╠➩〘Allprotect on/off〙
+╠➩〘Ban〙
+╠➩〘Unban〙
+╠➩〘Ban @〙
+╠➩〘Unban @〙
+╠➩〘Ban list〙
+╠➩〘Clear ban〙
+╠➩〘Kill〙
+╠➩〘Kick @〙
+╠➩〘Set member: (Jumblah)〙
+╠➩〘Ban group: (NamaGroup〙
+╠➩〘Del ban: (NamaGroup〙
+╠➩〘List ban〙
+╠➩〘Kill ban〙
+╠➩〘Glist〙
+╠➩〘Glistmid〙
+╠➩〘Details group: (Gid)〙
+╠➩〘Cancel invite: (Gid)〙
+╠➩〘Invitemeto: (Gid)〙
+╠➩〘Acc invite〙
+╠➩〘Removechat〙
+╠➩〘Qr on/off〙
+╠➩〘Autokick on/off〙
+╠➩〘Autocancel on/off〙
+╠➩〘Invitepro on/off〙
+╠➩〘Join on/off〙
+╠➩〘Joincancel on/off〙
+╠➩〘Respon1 on/off〙
+╠➩〘Respon2 on/off〙
+╠➩〘Respon3 on/off〙
+╠➩〘Responkick on/off〙
+╚═════════════════
 """
 
-helpMessage ="""╔════════════
-║     ✰ ΥυδHΔ βΟτ ✰
-╠════════════
-║ ᴏᴡɴᴇʀ : ᴍ.ᴡɪʀᴀ ʏᴜᴅʜᴀ ᴘ
-╠════════════
-║╔═══════════
-║╠❂➣〘!yudset〙
-║╠❂➣〘!yudbot〙
-║╠❂➣〘!yudself〙
-║╠❂➣〘!yudcr〙
-║╠❂➣〘!yudadm〙
-║╠❂➣〘!yudgm〙
-║╠❂➣〘!yudmedia〙
-║╠❂➣〘Pap owner〙
-║╠❂➣〘Owner〙
-║╠❂➣〘Admin〙
-║╠❂➣〘Speed〙
-║╠❂➣〘Speed test〙
-║╠❂➣〘Status〙
-╚════════════
+helpMessage ="""
+╔═════════════════
+║              ☆☞ H E L P ☜☆
+╠═════════════════
+╠➩〘!yudself〙
+╠➩〘!yudbot〙
+╠➩〘!yudgr〙
+╠➩〘!yudset〙
+╠➩〘!yudmed〙
+╠➩〘!yudadm〙
+╠➩〘!yudcr〙
+╠➩〘Owner〙
+╠➩〘Pap owner〙
+╠➩〘Speed〙
+╠➩〘Speed test〙
+╠➩〘Status〙
+╚═════════════════
 """
 
 
@@ -255,32 +244,36 @@ responsename = nadya.getProfile().displayName
 
 wait = {
     "LeaveRoom":True,
+    "Bot":True,
     "AutoJoin":False,
     "AutoJoinCancel":False,
-    "memberscancel":20,
+    "memberscancel":30,
     "Members":1,
     "AutoCancel":False,
-    "AutoKick":True,
+    "AutoKick":False,
     'pap':{},
     'invite':{},
     'steal':{},
     'gift':{},
+    'copy':{},    
     'likeOn':{},
-    'detectMention':True,
-    'kickMention':False,      
+    'detectMention':False,
+    'detectMention2':False,
+    'detectMention3':False,
+    'kickMention':False,  
+    'sticker':False,  
     'timeline':False,
     "Timeline":False,
     "comment":"Bot Auto Like By : Yudha\nContact Me : 👉 line.me/ti/p/~iniyud",    
-    "commentOn":False,
+    "commentOn":True,
     "commentBlack":{},
-    "message":"Thx For Add Me (^_^)\nInvite Me To Your Group ヘ(^_^)ヘ\nCreator :\nline.me/ti/p/~@ikj9968f\nline.me/ti/p/~iniyud",    
+    "message":"Thx For Add Me (^_^)\nInvite Me To Your Group ヘ(^_^)ヘ\n\nContact my creator\n\nline.me/ti/p/~iniyud\nline.me/ti/p/~@ikj9968f",    
     "blacklist":{},
     "wblacklist":False,
     "dblacklist":False,
     "Qr":False,
     "Contact":False,
     "Sambutan":False,
-    "Ghost":False,
     "inviteprotect":False,    
     "alwaysRead":False,    
     "Sider":{},
@@ -305,6 +298,13 @@ wait2 = {
     "setTime":{},
     "ROM":{}
     }
+    
+mimic = {
+    "copy":False,
+    "copy2":False,
+    "status":False,
+    "target":{}
+    }    
 
 setTime = {}
 setTime = wait2['setTime']
@@ -456,32 +456,6 @@ def sendImageWithURL(self, to_, url):
          except Exception as e:
             raise e
 
-def sendAudio(self, to_, path):
-        M = Message()
-        M.text = None
-        M.to = to_
-        M.contentMetadata = None
-        M.contentPreview = None
-        M.contentType = 3
-        M_id = self._client.sendMessage(0,M).id
-        files = {
-            'file': open(path, 'rb'),
-        }
-        params = {
-            'name': 'media',
-            'oid': M_id,
-            'size': len(open(path, 'rb').read()),
-            'type': 'audio',
-            'ver': '1.0',
-        }
-        data = {
-            'params': json.dumps(params)
-        }
-        r = self.post_content('https://os.line.naver.jp/talk/m/upload.nhn', data=data, files=files)
-        if r.status_code != 201:
-            raise Exception('Upload audio failure.')
-        return True
-
 def sendAudioWithURL(self, to_, url):
         path = self.downloadFileWithURL(url)
         try:
@@ -511,6 +485,31 @@ def downloadFileWithURL(self, fileUrl):
             return saveAs
         else:
             raise Exception('Download file failure.')
+            
+def summon(to, nama):
+    aa = ""
+    bb = ""
+    strt = int(14)
+    akh = int(14)
+    nm = nama
+    for mm in nm:
+      akh = akh + 2
+      aa += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(mm)+"},"""
+      strt = strt + 6
+      akh = akh + 4
+      bb += "\xe2\x95\xa0 @x \n"
+    aa = (aa[:int(len(aa)-1)])
+    msg = Message()
+    msg.to = to
+    msg.text = "\xe2\x95\x94\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\n"+bb+"\xe2\x95\x9a\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90\xe2\x95\x90"
+    msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+aa+']}','EMTVER':'4'}
+    print "[Command] Tag All"
+    try:
+       nadya.sendMessage(msg)
+    except Exception as error:
+       print error          
+                        
+       
 
 def restart_program():
     python = sys.executable
@@ -545,6 +544,7 @@ def bot(op):
                     if cctv['cyduk'][op.param1]==True:
                         if op.param1 in cctv['point']:
                             Name = nadya.getContact(op.param2).displayName
+#                            Name = summon(op.param2)
                             if Name in cctv['sidermem'][op.param1]:
                                 pass
                             else:
@@ -552,11 +552,17 @@ def bot(op):
                                 if " " in Name:
                                     nick = Name.split(' ')
                                     if len(nick) == 2:
-                                        nadya.sendText(op.param1, "Haii " + "☞ " + nick[0] + " ☜" + "\nNgintip Aja Niih. . .\nChat Kek Idiih (-__-)   ")
+                                        nadya.sendText(op.param1, "Haii " + "☞ " + Name + " ☜" + "\nNgintip Aja Niih. . .\nChat Kek Idiih (-__-)   ")
+                                        time.sleep(0.2)
+                                        summon(op.param1,[op.param2])
                                     else:
-                                        nadya.sendText(op.param1, "Haii " + "☞ " + nick[1] + " ☜" + "\nBetah Banget Jadi Penonton. . .\nChat Napa (-__-)   ")
+                                        nadya.sendText(op.param1, "Haii " + "☞ " + Name + " ☜" + "\nBetah Banget Jadi Penonton. . .\nChat Napa (-__-)   ")
+                                        time.sleep(0.2)
+                                        summon(op.param1,[op.param2])
                                 else:
                                     nadya.sendText(op.param1, "Haii " + "☞ " + Name + " ☜" + "\nNgapain Kak Ngintip Aja???\nSini Gabung Chat...   ")
+                                    time.sleep(0.2)
+                                    summon(op.param1,[op.param2])
                         else:
                             pass
                     else:
@@ -587,7 +593,7 @@ def bot(op):
 		    G = nadya.getGroup(op.param1)
                     if len(G.members) <= wait["memberscancel"]:
                         nadya.acceptGroupInvitation(op.param1)
-                        nadya.sendText(op.param1,"Maaf " + nadya.getContact(op.param2).displayName + "\nMember Kurang Dari 20 Orang\nUntuk Info, Silahkan Chat Owner Kami!")
+                        nadya.sendText(op.param1,"Maaf " + nadya.getContact(op.param2).displayName + "\nMember Kurang Dari 30 Orang\nUntuk Info, Silahkan Chat Owner Kami!")
                         nadya.leaveGroup(op.param1)                        
 		    else:
                         nadya.acceptGroupInvitation(op.param1)
@@ -763,23 +769,41 @@ def bot(op):
             ginfo = nadya.getGroup(op.param1)
             contact = nadya.getContact(op.param2)
             image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
+            nadya.sendText(op.param1,"Hallo " + nadya.getContact(op.param2).displayName + "\nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nJangan lupa bahagia")
             c = Message(to=op.param1, from_=None, text=None, contentType=13)
             c.contentMetadata={'mid':op.param2}
-            nadya.sendText(op.param1,"Hallo " + nadya.getContact(op.param2).displayName + "\nWelcome To ☞ " + str(ginfo.name) + " ☜" + "\nSemoga Betah Disini ^_^")
-            nadya.sendMessage(c)
+            nadya.sendMessage(c)  
             nadya.sendImageWithURL(op.param1,image)
-            #print "MEMBER JOIN TO GROUP"
+            d = Message(to=op.param1, from_=None, text=None, contentType=7)
+            d.contentMetadata={
+                                    "STKID": "13269548",
+                                    "STKPKGID": "1329191",
+                                    "STKVER": "1" }                
+            nadya.sendMessage(d)             
+            print "MEMBER JOIN TO GROUP"
 
         if op.type == 15:
           if wait["Sambutan"] == True:
             if op.param2 in Creator:
                 return
-            nadya.sendText(op.param1,"Good Bye " + nadya.getContact(op.param2).displayName +  "\nSee You Next Time . . . (p′︵‵。) 🤗")
-            #nadya.inviteIntoGroup(op.param1,[op.param2])
-            #print "MEMBER HAS LEFT THE GROUP"
+            nadya.sendText(op.param1,"Good Bye " + nadya.getContact(op.param2).displayName +  "\nSemoga tenang di alam sana (p′︵‵。) 🤗")
+            d = Message(to=op.param1, from_=None, text=None, contentType=7)
+            d.contentMetadata={
+                                    "STKID": "13269542",
+                                    "STKPKGID": "1329191",
+                                    "STKVER": "1" }                
+            nadya.sendMessage(d)                  
+            print "MEMBER HAS LEFT THE GROUP"
             
         if op.type == 26:
             msg = op.message
+            
+            if msg.from_ in mimic["target"] and mimic["status"] == True and mimic["target"][msg.from_] == True:
+                    text = msg.text
+                    if text is not None:
+                        nadya.sendText(msg.to,text)             
+            
+            
             if msg.to in settings["simiSimi"]:
                 if settings["simiSimi"][msg.to] == True:
                     if msg.text is not None:
@@ -796,7 +820,7 @@ def bot(op):
                      contact = nadya.getContact(msg.from_)
                      cName = contact.displayName
                      balas = ["Aku Bilang Jangan Ngetag Lagi " + cName + "\nAku Kick Kamu! Sorry, Byee!!!"]
-                     ret_ = "[ᴀᴜᴛᴏ ʀᴇsᴘᴏɴ ᴋɪᴄᴋ]" + random.choice(balas)                     
+                     ret_ = "[Auto Respond Kick] " + random.choice(balas)                     
                      name = re.findall(r'@(\w+)', msg.text)
                      mention = ast.literal_eval(msg.contentMetadata['MENTION'])
                      mentionees = mention['MENTIONEES']
@@ -810,20 +834,85 @@ def bot(op):
                  if wait["detectMention"] == True:
                      contact = nadya.getContact(msg.from_)
                      cName = contact.displayName
-                     balas = ["Dont Tag!! Lagi Sibuk",cName + " Ngapain Ngetag?",cName + " Nggak Usah Tag-Tag! Kalo Penting Langsung Pc Aja","-_-","Gw Lagi Off", cName + " Kenapa Tag Saya?","Gw Lagi Tidur\nJangan Di Tag " + cName, "Jangan Suka Tag Gua " + cName, "Kamu Siapa " + cName + "?", "Ada Perlu Apa " + cName + "?","Woii " + cName + " Jangan Ngetag, Riibut!","Tersummon-_","Apasih pens? Tag mulu_-","وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِوَبَرَكَاتُ","Yudha nya lagi off, pc aja kalo penting!"]
-                     ret_ = "[ᴀᴜᴛᴏʀᴇsᴘᴏɴ]" + random.choice(balas)
+                     balas = ["Dont Tag!! Lagi Sibuk",cName + " Ngapain Ngetag?",cName + " Nggak Usah Tag-Tag! Kalo Penting Langsung Pc Aja","Dia Lagi Off", cName + " Kenapa Tag Saya?","Dia Lagi Tidur\nJangan Di Tag " + cName, "Jangan Suka Tag Gua " + cName, "Kamu Siapa " + cName + "?", "Ada Perlu Apa " + cName + "?","Woii " + cName + " Jangan Ngetag, Riibut!","Yudha nya lagi off, pc aja kalo penting!","وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِوَبَرَكَاتُ"]
+                     ret_ = "[ᴀᴜᴛᴏʀᴇsᴘᴏɴ] " + random.choice(balas)
                      name = re.findall(r'@(\w+)', msg.text)
                      mention = ast.literal_eval(msg.contentMetadata['MENTION'])
                      mentionees = mention['MENTIONEES']
                      for mention in mentionees:
                            if mention['M'] in Bots:
                                   nadya.sendText(msg.to,ret_)
-                                  break              
-
+                                  break   
+                              
+            if 'MENTION' in msg.contentMetadata.keys() != None:
+                 if wait["detectMention2"] == True:          
+                    contact = nadya.getContact(msg.from_)
+                    cName = contact.displayName
+                    balas = ["Sekali lagi nge tag gw sumpahin jomblo seumur hidup!","Nggak Usah Tag-Tag! Kalo Penting Langsung Pc Aja","Woii " + cName + " Jangan Ngetag, Riibut!","Yudha nya lagi off, pc aja kalo penting!","وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِوَبَرَكَاتُ"]
+                    ret_ = "[ᴀᴜᴛᴏʀᴇsᴘᴏɴ] " + random.choice(balas)
+                    name = re.findall(r'@(\w+)', msg.text)
+                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                    mentionees = mention['MENTIONEES']
+                    for mention in mentionees:
+                           if mention['M'] in Bots:
+                                  nadya.sendText(msg.to,ret_)
+                                  msg.contentType = 7   
+                                  msg.text = None
+                                  msg.contentMetadata = {
+                                                       "STKID": "20001316",
+                                                       "STKPKGID": "1582380",
+                                                       "STKVER": "1" }
+                                  nadya.sendMessage(msg)                                
+                                  break
+                              
+            if 'MENTION' in msg.contentMetadata.keys() != None:
+                 if wait["detectMention3"] == True:          
+                    contact = nadya.getContact(msg.from_)
+                    cName = contact.displayName
+                    balas = ["Woii " + cName + ", Dasar Jones Ngetag Mulu!"]
+                    balas1 = "Ini Foto Sii Jones Yang Suka Ngetag. . ."
+                    ret_ = "[ᴀᴜᴛᴏʀᴇsᴘᴏɴ] " + random.choice(balas)
+                    image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
+                    name = re.findall(r'@(\w+)', msg.text)
+                    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                    mentionees = mention['MENTIONEES']
+                    for mention in mentionees:
+                           if mention['M'] in Bots:
+                                  nadya.sendText(msg.to,ret_)
+                                  nadya.sendText(msg.to,balas1)
+                                  nadya.sendImageWithURL(msg.to,image)
+                                  msg.contentType = 7   
+                                  msg.text = None
+                                  msg.contentMetadata = {
+                                                       "STKID": "11764508",
+                                                       "STKPKGID": "6641",
+                                                       "STKVER": "1" }
+                                  nadya.sendMessage(msg)                                
+                                  break  
+                                  
+        if op.type == 25:
+            msg = op.message                                  
+                              
+            if msg.text in ["Bot on"]:
+                wait["Bot"] = True
+                nadya.sendText(msg.to,"Bot Sudah On Kembali.")  
 
         if op.type == 25:
+          if wait["Bot"] == True:    
             msg = op.message
-
+            
+            
+            if msg.contentType == 7:
+              if wait["sticker"] == True:
+                msg.contentType = 0
+                stk_id = msg.contentMetadata['STKID']
+                stk_ver = msg.contentMetadata['STKVER']
+                pkg_id = msg.contentMetadata['STKPKGID']
+                filler = "『 Sticker Check 』\nSTKID : %s\nSTKPKGID : %s\nSTKVER : %s\n『 Link 』\nline://shop/detail/%s" % (stk_id,pkg_id,stk_ver,pkg_id)
+                nadya.sendText(msg.to, filler)
+                wait["sticker"] = False
+            else:
+                pass              
 
             if wait["alwaysRead"] == True:
                 if msg.toType == 0:
@@ -831,11 +920,12 @@ def bot(op):
                 else:
                     nadya.sendChatChecked(msg.to,msg.id)
                     
+                    
             if msg.contentType == 16:
                 if wait['likeOn'] == True:
                      url = msg.contentMetadata["postEndUrl"]
                      nadya.like(url[25:58], url[66:], likeType=1005)
-                     nadya.comment(url[25:58], url[66:], wait["autolike by yudha\n\nline.me/ti/p/~@ikj9968f\nline.me/ti/p/~iniyud"])
+                     nadya.comment(url[25:58], url[66:], wait["comment"])
                      nadya.sendText(msg.to,"Like Success")                     
                      wait['likeOn'] = False
 
@@ -921,75 +1011,6 @@ def bot(op):
                 msg.contentMetadata = {'mid': tjia}
                 nadya.sendMessage(msg)
 		nadya.sendText(msg.to,"Itu Majikan Kami (^_^)")
-		
-            elif msg.text in ["Admin","admin"]:
-                msg.contentType = 13
-                msg.contentMetadata = {'mid': tjia}
-                nadya.sendMessage(msg)
-                             
-		nadya.sendText(msg.to,"Itu Admin Kami (^_^)")	
-		
- 
-                
-            elif "Admin add @" in msg.text:
-              if msg.from_ in Creator:
-                print "[Command]Admin add executing"
-                _name = msg.text.replace("Admin add @","")
-                _nametarget = _name.rstrip('  ')
-                gs = nadya.getGroup(msg.to)
-                targets = []
-                for g in gs.members:
-                    if _nametarget == g.displayName:
-                        targets.append(g.mid)
-                if targets == []:
-                   nadya.sendText(msg.to,"Contact Tidak Di Temukan")
-                else:
-                   for target in targets:
-                        try:
-                            admin.append(target)
-                            nadya.sendText(msg.to,"Admin Chucky Ditambahkan")
-                        except:
-                            pass
-                print "[Command]Admin add executed"
-              else:
-                nadya.sendText(msg.to,"Command Denied.")
-                nadya.sendText(msg.to,"Creator Permission Required.")
-                
-            elif "Admin remove @" in msg.text:
-              if msg.from_ in Creator:
-                print "[Command]Admin Remove Executing"
-                _name = msg.text.replace("Admin remove @","")
-                _nametarget = _name.rstrip('  ')
-                gs = nadya.getGroup(msg.to)
-                targets = []
-                for g in gs.members:
-                    if _nametarget == g.displayName:
-                        targets.append(g.mid)
-                if targets == []:
-                   nadya.sendText(msg.to,"Contact Tidak Di Temukan")
-                else:
-                   for target in targets:
-                        try:
-                            admin.remove(target)
-                            nadya.sendText(msg.to,"Admin Chucky Dihapus")
-                        except:
-                            pass
-                print "[Command]Admin remove executed"
-              else:
-                nadya.sendText(msg.to,"Command Denied.")
-                nadya.sendText(msg.to,"Creator Permission Required.")
-                
-            elif msg.text in ["Admin list","admin list","List admin"]:
-              if admin == []:
-                  nadya.sendText(msg.to,"The Admin List Is Empty")
-              else:
-                  nadya.sendText(msg.to,"Tunggu...")
-                  mc = "╔═════════════════════════\n║        ☆☞ ADMIN CHUCKY ☜☆\n╠═════════════════════════\n"
-                  for mi_d in admin:
-                      mc += "╠••> " +nadya.getContact(mi_d).displayName + "\n"
-                  nadya.sendText(msg.to,mc + "╚═════════════════════════")
-                  print "[Command]Admin List executed"
-                 
 
  
 
@@ -1078,6 +1099,33 @@ def bot(op):
                                      wait["gift"] = False
                                      break
 
+            if msg.contentType == 13:
+                if wait["copy"] == True:
+                    _name = msg.contentMetadata["displayName"]
+                    copy = msg.contentMetadata["mid"]
+                    groups = nadya.getGroup(msg.to)
+                    targets = []
+                    for s in groups.members:
+                        if _name in s.displayName:
+                            print "[Target] Copy"
+                            break                             
+                        else:
+                            targets.append(copy)
+                    if targets == []:
+                        nadya.sendText(msg.to, "Not Found...")
+                        pass
+                    else:
+                        for target in targets:
+                            try:
+                                nadya.CloneContactProfile(target)
+                                nadya.sendText(msg.to, "Copied (^_^)")
+                                wait['copy'] = False
+                                break
+                            except:
+                                     msg.contentMetadata = {'mid': target}
+                                     wait["copy"] = False
+                                     break
+
 
             if msg.contentType == 13:
                 if wait['invite'] == True:
@@ -1107,29 +1155,29 @@ def bot(op):
                                       break
                                   
  
-            elif msg.text in ["!yudcr"]:
+            elif msg.text in ["Key creator","!yudcr","Help creator"]:
                 nadya.sendText(msg.to,creatorMessage)
 
-            elif msg.text in ["!yudgm"]:
+            elif msg.text in ["Key group","!yudgr","Help group"]:
                 nadya.sendText(msg.to,groupMessage)
 
             elif msg.text in ["!yud"]:
                 nadya.sendText(msg.to,helpMessage)
 
-            elif msg.text in ["!yudself"]:
+            elif msg.text in ["Key self","!yudself","Help self"]:
                 nadya.sendText(msg.to,selfMessage)
 
-            elif msg.text in ["!yudbot"]:
+            elif msg.text in ["Key bot","!yudbot","Help bot"]:
                 nadya.sendText(msg.to,botMessage)
 
-            elif msg.text in ["!yudset"]:
+            elif msg.text in ["Key set","!yudset","Help set"]:
                 nadya.sendText(msg.to,setMessage)
 
-            elif msg.text in ["!yudmedia"]:
+            elif msg.text in ["Key media","!yudmed","Help media"]:
                 nadya.sendText(msg.to,mediaMessage)
                 
-            elif msg.text in ["!yudadm"]:
-                nadya.sendText(msg.to,adminMessage)                
+            elif msg.text in ["Key admin","!yudadm","Help admin"]:
+                nadya.sendText(msg.to,adminMessage)               
                 
 
  
@@ -1296,27 +1344,65 @@ def bot(op):
 		    nadya.sendText(msg.to,"Khusus Yudha")		    
 		    
  
-            elif msg.text in ["Respon on"]:
+            elif msg.text in ["Respon1 on"]:
 		if msg.from_ in admin:
                     wait["detectMention"] = True
+                    wait["detectMention2"] = False
+                    wait["detectMention3"] = False
                     wait["kickMention"] = False
-                    nadya.sendText(msg.to,"Auto Respon Sudah Aktif")
+                    nadya.sendText(msg.to,"Auto Respon1 Sudah Aktif")
 		else:
 		    nadya.sendText(msg.to,"Khusus Yudha")
 
-            elif msg.text in ["Respon off"]:
+            elif msg.text in ["Respon1 off"]:
 		if msg.from_ in admin:
                     wait["detectMention"] = False
-                    nadya.sendText(msg.to,"Auto Respon Sudah Off")
+                    nadya.sendText(msg.to,"Auto Respon1 Sudah Off")
 		else:
 		    nadya.sendText(msg.to,"Khusus Yudha")	
 		    
+		    
+            elif msg.text in ["Respon2 on"]:
+		if msg.from_ in admin:
+                    wait["detectMention"] = False
+                    wait["detectMention2"] = True
+                    wait["detectMention3"] = False
+                    wait["kickMention"] = False
+                    nadya.sendText(msg.to,"Auto Respon2 Sudah Aktif")
+		else:
+		    nadya.sendText(msg.to,"Khusus Yudha")
+            elif msg.text in ["Respon2 off"]:
+		if msg.from_ in admin:
+                    wait["detectMention2"] = False
+                    nadya.sendText(msg.to,"Auto Respon2 Sudah Off")
+		else:
+		    nadya.sendText(msg.to,"Khusus Yudha")	
+		    
+
+            elif msg.text in ["Respon3 on"]:
+		if msg.from_ in admin:
+                    wait["detectMention"] = False
+                    wait["detectMention2"] = False
+                    wait["detectMention3"] = True
+                    wait["kickMention"] = False
+                    nadya.sendText(msg.to,"Auto Respon3 Sudah Aktif")
+		else:
+		    nadya.sendText(msg.to,"Khusus Yudha")
+
+            elif msg.text in ["Respon3 off"]:
+		if msg.from_ in admin:
+                    wait["detectMention3"] = False
+                    nadya.sendText(msg.to,"Auto Respon3 Sudah Off")
+		else:
+		    nadya.sendText(msg.to,"Khusus Yudha")	
 		    
  
             elif msg.text in ["Responkick on"]:
 		if msg.from_ in admin:
                     wait["kickMention"] = True  
                     wait["detectMention"] = False
+                    wait["detectMention2"] = False
+                    wait["detectMention3"] = False                    
                     nadya.sendText(msg.to,"Auto Respon Kick Sudah Aktif")
 		else:
 		    nadya.sendText(msg.to,"Khusus Yudha")
@@ -1392,19 +1478,6 @@ def bot(op):
 	     else:
 	        nadya.sendText(msg.to,"Khusus Yudha")	     
 
-	    elif "Ghost on" in msg.text:
-	     if msg.from_ in admin:	 	        
-		     wait["Ghost"] = True
-		     nadya.sendText(msg.to,"Ghost Sudah Aktif")
-	     else:
-	        nadya.sendText(msg.to,"Khusus Yudha")		     
-
-	    elif "Ghost off" in msg.text:
-	     if msg.from_ in admin:	 	        
-		     wait["Ghost"] = False
-		     nadya.sendText(msg.to,"Ghost Sudah Di Nonaktifkan")
-	     else:
-	         nadya.sendText(msg.to,"Khusus Yudha")		     
 
             elif msg.text in ["Allprotect on"]:
 		if msg.from_ in admin:
@@ -1412,10 +1485,9 @@ def bot(op):
                     wait["inviteprotect"] = True                   
                     wait["AutoKick"] = True
                     wait["Qr"] = True
-                    wait["Ghost"] = True                     
                     nadya.sendText(msg.to,"All Protect Sudah Aktif Semua")
 		else:
-		    nadya.sendText(msg.to,"Khusus уυ∂нa")
+		    nadya.sendText(msg.to,"Khusus Yudha")
 
             elif msg.text in ["Allprotect off"]:
 		if msg.from_ in admin:
@@ -1423,10 +1495,9 @@ def bot(op):
                     wait["inviteprotect"] = False                    
                     wait["AutoKick"] = False
                     wait["Qr"] = False
-                    wait["Ghost"] = False                    
                     nadya.sendText(msg.to,"All Protect Sudah Di Nonaktifkan Semua")
 		else:
-		    nadya.sendText(msg.to,"Khusus уυ∂нa")
+		    nadya.sendText(msg.to,"Khusus Yudha")
 
 
             elif msg.text in ["K on","Contact on"]:
@@ -1486,103 +1557,8 @@ def bot(op):
                     nadya.sendText(msg.to, "Cek Sider Off")
                 else:
                     nadya.sendText(msg.to, "Heh Belom Di Set")                         
-            
-            elif "cctv on" == msg.text.lower():
-                if msg.to in wait2['readPoint']:
-                        try:
-                            del wait2['readPoint'][msg.to]
-                            del wait2['readMember'][msg.to]
-                            del wait2['setTime'][msg.to]
-                        except:
-                            pass
-                        wait2['readPoint'][msg.to] = msg.id
-                        wait2['readMember'][msg.to] = ""
-                        wait2['setTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
-                        wait2['ROM'][msg.to] = {}
-                        with open('sider.json', 'w') as fp:
-                         json.dump(wait2, fp, sort_keys=True, indent=4)
-                         kr.sendText(msg.to,"Setpoint already on")
-                else:
-                    try:
-                            del wait2['readPoint'][msg.to]
-                            del wait2['readMember'][msg.to]
-                            del wait2['setTime'][msg.to]
-                    except:
-                          pass
-                    wait2['readPoint'][msg.to] = msg.id
-                    wait2['readMember'][msg.to] = ""
-                    wait2['setTime'][msg.to] = datetime.now().strftime('%H:%M:%S')
-                    wait2['ROM'][msg.to] = {}
-                    with open('sider.json', 'w') as fp:
-                     json.dump(wait2, fp, sort_keys=True, indent=4)
-                     kr.sendText(msg.to, "Set reading point:\n" + datetime.now().strftime('%H:%M:%S'))
-                     print wait2
-
-                    
-            elif "cctv off" == msg.text.lower():
-                if msg.to not in wait2['readPoint']:
-                    kr.sendText(msg.to,"Setpoint already off")
-                else:
-                    try:
-                            del wait2['readPoint'][msg.to]
-                            del wait2['readMember'][msg.to]
-                            del wait2['setTime'][msg.to]
-                    except:
-                          pass
-                    kr.sendText(msg.to, "Delete reading point:\n" + datetime.now().strftime('%H:%M:%S'))
 
 
-                    
-            elif msg.text in ["toong","Toong"]:
-                 if msg.toType == 2:
-                    print "\nRead aktif..."
-                    if msg.to in wait2['readPoint']:
-                        if wait2["ROM"][msg.to].items() == []:
-                            chiya = ""
-                        else:
-                            chiya = ""
-                            for rom in wait2["ROM"][msg.to].items():
-                                print rom
-                                chiya += rom[1] + "\n"
-                        kr.sendText(msg.to, "╔═════════════ \n╠❂➣Sider :\n╠═════════════                     %s\n╠\n╠═════════════\n╠❂➣Reader :\n╠═════════════ %s\n╠\n╠═════════════\n╠In the last seen point:\n╠[%s]\n╚═════════════" % (wait2['readMember'][msg.to],chiya,setTime[msg.to]))
-                        print "\nReading Point Set..."
-                        try:
-                            del wait2['readPoint'][msg.to]
-                            del wait2['readMember'][msg.to]
-                        except:
-                            pass
-                        wait2['readPoint'][msg.to] = msg.id
-                        wait2['readMember'][msg.to] = ""
-                        wait2['setTime'][msg.to] = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-                        wait2['ROM'][msg.to] = {}
-                        print "toong ready"
-                        kr.sendText(msg.to, "Auto Read Point!!" + (wait2['setTime'][msg.to]))
-                    else:
-                        kr.sendText(msg.to, "Ketik [Cctv on] dulu, baru ketik [Toong]")
-            elif "intip" == msg.text.lower():
-                    if msg.to in wait2['readPoint']:
-                        if wait2["ROM"][msg.to].items() == []:
-                             kr.sendText(msg.to, "Reader:\nNone")
-                        else:
-                            chiya = []
-                            for rom in wait2["ROM"][msg.to].items():
-                                chiya.append(rom[1])
-                               
-                            cmem = kr.getContacts(chiya)
-                            zx = ""
-                            zxc = ""
-                            zx2 = []
-                            xpesan = ''
-                        for x in range(len(cmem)):
-                                xname = str(cmem[x].displayName)
-                                pesan = ''
-                                pesan2 = pesan+"@a\n"
-                                xlen = str(len(zxc)+len(xpesan))
-                                xlen2 = str(len(zxc)+len(pesan2)+len(xpesan)-1)
-                                zx = {'S':xlen, 'E':xlen2, 'M':cmem[x].mid}
-                                zx2.append(zx)
-                                zxc += pesan2
-                                msg.contentType = 0
             elif msg.text in ["Status"]:
                 md = ""
 		if wait["Sambutan"] == True: md+="╠➩✔️ Sambutan : On\n"
@@ -1601,19 +1577,21 @@ def bot(op):
 		else:md+="╠➩❌ Qr Protect : Off\n"
 		if wait["AutoKick"] == True: md+="╠➩✔️ Auto Kick : On\n"
 		else:md+="╠➩❌ Auto Kick : Off\n"
-		if wait["Ghost"] == True: md+="╠➩✔️ Ghost : On\n"
-		else:md+="╠➩❌ Ghost : Off\n"
 		if wait["alwaysRead"] == True: md+="╠➩✔️ Always Read : On\n"
 		else:md+="╠➩❌ Always Read: Off\n"
-		if wait["detectMention"] == True: md+="╠➩✔️ Auto Respon : On\n"
-		else:md+="╠➩❌ Auto Respon : Off\n"		
+		if wait["detectMention"] == True: md+="╠➩✔️ Auto Respon1 : On\n"
+		else:md+="╠➩❌ Auto Respon1 : Off\n"		
+		if wait["detectMention2"] == True: md+="╠➩✔️ Auto Respon2 : On\n"
+		else:md+="╠➩❌ Auto Respon2 : Off\n"	
+		if wait["detectMention3"] == True: md+="╠➩✔️ Auto Respon3 : On\n"
+		else:md+="╠➩❌ Auto Respon3 : Off\n"			
 		if wait["kickMention"] == True: md+="╠➩✔️ Auto Respon Kick : On\n"
 		else:md+="╠➩❌ Auto Respon Kick : Off\n"				
 		if wait["Sider"] == True: md+="╠➩✔️ Auto Sider : On\n"
 		else:md+="╠➩❌ Auto Sider: Off\n"	
 		if wait["Simi"] == True: md+="╠➩✔️ Simisimi : On\n"
 		else:md+="╠➩❌ Simisimi: Off\n"		
-                nadya.sendText(msg.to,"╔═════════════════════════\n""║           ☆☞ S T A T U S ☜☆\n""╠═════════════════════════\n"+md+"╚═════════════════════════")
+                nadya.sendText(msg.to,"╔══════════════════════\n""║           ☆☞ S T A T U S ☜☆\n""╠══════════════════════\n"+md+"╚══════════════════════")
 
 
             elif msg.text in ["Gift","gift"]:
@@ -1625,7 +1603,7 @@ def bot(op):
                 nadya.sendMessage(msg)
                 
                 
-            elif "Gift. " in msg.text:
+            elif "Gift1 " in msg.text:
                        msg.contentType = 13
                        nk0 = msg.text.replace("Gift1 ","")
                        nk1 = nk0.lstrip()
@@ -1982,7 +1960,7 @@ def bot(op):
                 msg.text = None
                 nadya.sendMessage(msg)
 
-            elif msg.text.lower() in ["lucu","lol"]:
+            elif msg.text.lower() in ["lucu","ngakak","lol"]:
                 msg.contentType = 7
                 msg.contentMetadata={'STKID': '110',
                                     'STKPKGID': '1',
@@ -2086,35 +2064,124 @@ def bot(op):
                 msg.text = None
                 nadya.sendMessage(msg)
                 
-        
 
-
-            elif msg.text in ["Tagall","Numpang tag"]:
-                  group = nadya.getGroup(msg.to)
-                  nama = [contact.mid for contact in group.members]
-
-                  cb = ""
-                  cb2 = ""
-                  strt = int(0)
-                  akh = int(0)
-                  for md in nama:
-                      akh = akh + int(6)
-
-                      cb += """{"S":"""+json.dumps(str(strt))+""","E":"""+json.dumps(str(akh))+""","M":"""+json.dumps(md)+"},"""
-
-                      strt = strt + int(7)
-                      akh = akh + 1
-                      cb2 += "@nrik \n"
-
-                  cb = (cb[:int(len(cb)-1)])
-                  msg.contentType = 0
-                  msg.text = cb2
-                  msg.contentMetadata ={'MENTION':'{"MENTIONEES":['+cb+']}','EMTVER':'4'}
-
-                  try:
-                      nadya.sendMessage(msg)
-                  except Exception as error:
-                      print error
+            elif "numpang tag" == msg.text.lower():
+                 group = nadya.getGroup(msg.to)
+                 nama = [contact.mid for contact in group.members]
+                 nm1, nm2, nm3, nm4, nm5, jml = [], [], [], [], [], len(nama)
+                 if jml <= 100:
+                    summon(msg.to, nama)
+                 if jml > 100 and jml < 200:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, len(nama)-1): 
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)                 
+                 if jml > 200 and jml < 300:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, len(nama)-1):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                 if jml > 300  and jml < 400:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, 299):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                    for l in range(300, len(nama)-1):
+                    	nm4 += [nama[l]]
+                    summon(msg.to, nm4)
+                 if jml > 400  and jml < 500:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, 299):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                    for l in range(300, 399):
+                        nm4 += [nama[l]]
+                    summon(msg.to, nm4)
+                    for m in range(400, len(nama)-1):
+                        nm5 += [nama[m]]
+                    summon(msg.to, nm5)
+                 if jml > 500:
+                     print "Terlalu Banyak Men 500+"
+                 cnt = Message()
+                 cnt.text = "Jumlah:\n" + str(jml) +  " Members"
+                 cnt.to = msg.to
+                 nadya.sendMessage(cnt)
+                 
+            elif "nt" == msg.text.lower():
+                 group = nadya.getGroup(msg.to)
+                 nama = [contact.mid for contact in group.members]
+                 nm1, nm2, nm3, nm4, nm5, jml = [], [], [], [], [], len(nama)
+                 if jml <= 100:
+                    summon(msg.to, nama)
+                 if jml > 100 and jml < 200:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, len(nama)-1): 
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)                 
+                 if jml > 200 and jml < 300:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, len(nama)-1):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                 if jml > 300  and jml < 400:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, 299):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                    for l in range(300, len(nama)-1):
+                    	nm4 += [nama[l]]
+                    summon(msg.to, nm4)
+                 if jml > 400  and jml < 500:
+                    for i in range(0, 99):
+                        nm1 += [nama[i]]
+                    summon(msg.to, nm1)
+                    for j in range(100, 199):
+                        nm2 += [nama[j]]
+                    summon(msg.to, nm2)
+                    for k in range(200, 299):
+                        nm3 += [nama[k]]
+                    summon(msg.to, nm3)
+                    for l in range(300, 399):
+                        nm4 += [nama[l]]
+                    summon(msg.to, nm4)
+                    for m in range(400, len(nama)-1):
+                        nm5 += [nama[m]]
+                    summon(msg.to, nm5)
+                 if jml > 500:
+                     print "Terlalu Banyak Men 500+"
+                 cnt = Message()
+                 cnt.text = "Jumlah:\n" + str(jml) +  " Members"
+                 cnt.to = msg.to
+                 nadya.sendMessage(cnt)                 
 
 
             elif msg.text in ["Setview","Setpoint","Cctv"]:
@@ -2150,9 +2217,9 @@ def bot(op):
                         dataResult.append(contactId[v].displayName + ' ('+timeSeen[v]+')')
                         pass
                     if len(dataResult) > 0:
-                        tukang = "╔═════════════════════════\n║         ☆☞ LIST VIEWERS ☜☆\n╠═════════════════════════\n╠➩"
+                        tukang = "╔══════════════════════\n║         ☆☞ LIST VIEWERS ☜☆\n╠══════════════════════\n╠➩"
                         grp = '\n╠➩ '.join(str(f) for f in dataResult)
-                        total = '\n╠═════════════════════════\n╠➩ Total %i Viewers (%s)' % (len(dataResult), datetime.now().strftime('%H:%M:%S')) + "\n╚═════════════════════════"
+                        total = '\n╠══════════════════════\n╠➩ Total %i Viewers (%s)' % (len(dataResult), datetime.now().strftime('%H:%M:%S')) + "\n╚══════════════════════"
                         nadya.sendText(msg.to, "%s %s %s" % (tukang, grp, total))
                         subprocess.Popen("echo '' > dataSeen/"+msg.to+".txt", shell=True, stdout=subprocess.PIPE)
                         nadya.sendText(msg.to, "☆Auto Checkpoint☆")                        
@@ -2205,12 +2272,23 @@ def bot(op):
                 wait["gift"] = True
                 nadya.sendText(msg.to,"Send Contact") 
                 
+            elif msg.text in ["Copycontact"]:
+                wait["copy"] = True
+                nadya.sendText(msg.to,"Send Contact") 
+                
+            elif msg.text in ["Sticker on"]:
+                wait["sticker"] = True
+                nadya.sendText(msg.to,"Sticker ID Detect Already On.")  
+                
+            elif msg.text in ["Bot off"]:
+                wait["Bot"] = False
+                nadya.sendText(msg.to,"Bot Sudah Di Nonaktifkan.")  
 
-	    elif "Recover" in msg.text:
+	    elif "Rc" in msg.text:
 		thisgroup = nadya.getGroups([msg.to])
 		Mids = [contact.mid for contact in thisgroup[0].members]
 		mi_d = Mids[:33]
-		nadya.createGroup("Recover", mi_d)
+		nadya.createGroup("Rc", mi_d)
 		nadya.sendText(msg.to,"Success recover")
 
 
@@ -2292,20 +2370,20 @@ def bot(op):
 		    
 
             elif msg.text in ["Absen"]:
-		nadya.sendText(msg.to,"Hadir!!")
+		nadya.sendText(msg.to,"Yud hadir!!")
 
 
             elif msg.text.lower() in ["respon"]:
                 nadya.sendText(msg.to,responsename)
 
-            elif msg.text in ["Speed","Gas"]:
+            elif msg.text in ["Sp","Speed","speed"]:
                 start = time.time()
                 print("Speed")                
                 elapsed_time = time.time() - start
 		nadya.sendText(msg.to, "Progress...")
                 nadya.sendText(msg.to, "%sseconds" % (elapsed_time))
                 
-            elif msg.text in ["Speed test"]:
+            elif msg.text in ["Gas"]:
                 start = time.time()
                 nadya.sendText(msg.to, "Progress...")
                 elapsed_time = time.time() - start
@@ -2382,14 +2460,10 @@ def bot(op):
                                 nadya.sendText(msg.to,"Succes BosQ")
                                 
                                 
-            elif msg.text.lower() == 'Clear':
+            elif msg.text.lower() == 'clear ban':
                 if msg.from_ in admin:
                     wait["blacklist"] = {}
                     nadya.sendText(msg.to,"ヽ( ^ω^)ﾉ└ ❉Unbanned All Success❉ ┐") 
-
-            elif msg.text.lower() in ["yud","Yud","Yudha","yudha"]:
-                nadya.sendText(msg.to,"Apa Manggil-Manggil!?") 
-                
 
  
             elif msg.text in ["Kill ban"]:
@@ -2452,7 +2526,7 @@ def bot(op):
 			    nadya.inviteIntoGroup(msg.to, targets)
  
 
-	    elif msg.text in ["Restart","Reboot"]:
+	    elif msg.text in ["Bot restart","Reboot"]:
 		if msg.from_ in Creator:
 		    nadya.sendText(msg.to, "Bot Has Been Restarted...")
 		    restart_program()
@@ -2472,7 +2546,7 @@ def bot(op):
             elif 'Crash' in msg.text:
               if msg.from_ in Creator:
                 msg.contentType = 13
-                msg.contentMetadata = {'mid': "YUDHA,'"}
+                msg.contentMetadata = {'mid': "Yudha,'"}
                 nadya.sendMessage(msg)
 
  
@@ -2600,6 +2674,13 @@ def bot(op):
                                 print error
                                 nadya.sendText(msg.to,"Upload image failed.")
                                 
+            elif "Cpp" in msg.text:
+                if msg.from_ in admin:
+                    path = "nadya.jpg"
+                    nadya.sendText(msg.to,"Update PP :")
+                    nadya.sendImage(msg.to,path)
+                    nadya.updateProfilePicture(path)                                
+                                
                                 
             elif "pp @" in msg.text:
                 if msg.toType == 2:
@@ -2641,16 +2722,8 @@ def bot(op):
                                 print error
                                 nadya.sendText(msg.to,"Upload image failed.")
 
-            elif msg.text.lower() in ["Pap owner","pap creator"]:
-                                link = ["http://dl.profile.line-cdn.net/0hMJ3wNk9PEmUODj5b835tMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz","http://dl.profile.line-cdn.net/0hMJ3w2Qf_EmUODj5b8-1tMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz"]
-                                pilih = random.choice(link)
-                                nadya.sendImageWithURL(msg.to,pilih)
-            elif msg.text.lower() in ["Ngakak"]:
-                                link = ["http://dl.profile.line-cdn.net/0hMJ3wjF-UEmUODj5Y4IJtMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz","http://dl.profile.line-cdn.net/0hMJ3wSaBzEmUODj5Y5hNtMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz","http://dl.profile.line-cdn.net/0hMJ3wBhJzEmUODj5Y5j1tMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz"]
-                                pilih = random.choice(link)
-                                nadya.sendImageWithURL(msg.to,pilih)
-            elif msg.text.lower() in ["Sepi"]:
-                                link = ["http://dl.profile.line-cdn.net/0hMJ3wUwdjEmUODj5Y7jxtMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz"]
+            elif msg.text.lower() in ["pap owner","pap creator"]:
+                                link = ["http://dl.profile.line-cdn.net/0hMJ3w03iOEmUODj51FXRtMjJLHAh5IAMtYGhbUHsOSAclNlYxMW4NAnxaSgEmOAUxZThaCikPRFVz"]
                                 pilih = random.choice(link)
                                 nadya.sendImageWithURL(msg.to,pilih)
 
@@ -2687,6 +2760,7 @@ def bot(op):
                     text = data[0].get('content').split()
                     data1 = soup.find_all('meta', attrs={'property':'og:image'})
                     text1 = data1[0].get('content').split()
+                    tj = text1[0].replace("s150x150/","")
                     user = "Name: " + text[-2] + "\n"
                     user1 = "Username: " + text[-1] + "\n"
                     followers = "Followers: " + text[0] + "\n"
@@ -2696,7 +2770,7 @@ def bot(op):
                     detail = "========INSTAGRAM INFO ========\n"
                     details = "\n========INSTAGRAM INFO ========"
                     nadya.sendText(msg.to, detail + user + user1 + followers + following + post + link + details)
-                    nadya.sendImageWithURL(msg.to, text1[0])
+                    nadya.sendImageWithURL(msg.to, tj)
                 except Exception as njer:
                 	nadya.sendText(msg.to, str(njer))
                 	
@@ -2789,7 +2863,7 @@ def bot(op):
 
 
             elif msg.text.lower() in ["hi","hai","halo","hallo"]:
-                    beb = "Hi Juga " +nadya.getContact(msg.from_).displayName 
+                    beb = "Hi Juga " +nadya.getContact(msg.from_).displayName
                     nadya.sendText(msg.to,beb)
 
 
@@ -2798,7 +2872,7 @@ def bot(op):
                 tob = msg.text.lower().replace("playstore ","")
                 nadya.sendText(msg.to,"Sedang Mencari...")
                 nadya.sendText(msg.to,"Title : "+tob+"\nSource : Google Play\nLink : https://play.google.com/store/search?q=" + tob)
-                nadya.sendText(msg.to,"Tuh Linknya Kak (^_^)")
+                nadya.sendText(msg.to,"Tuh Linknya Kak")
 
 
             elif "Mid @" in msg.text:
@@ -2814,7 +2888,7 @@ def bot(op):
 
             elif "Mybio " in msg.text:
                     string = msg.text.replace("Mybio ","")
-                    if len(string.decode('utf-8')) <= 5000:
+                    if len(string.decode('utf-8')) <= 50000:
                         profile = nadya.getProfile()
                         profile.statusMessage = string
                         nadya.updateProfile(profile)
@@ -2837,7 +2911,7 @@ def bot(op):
 
             elif msg.text.lower() in ["me"]:
                 msg.contentType = 13
-                msg.contentMetadata = {'mid': tjia}
+                msg.contentMetadata = {'mid': msg.from_}
                 nadya.sendMessage(msg)
 
             elif "/apakah " in msg.text:
@@ -2856,7 +2930,7 @@ def bot(op):
                 lang = 'id'
                 tts = gTTS(text=p, lang=lang)
                 tts.save("hasil.mp3")
-                nadya.sendAudio(msg.to,"hasil.mp3")                
+                nadya.sendAudio(msg.to,"hasil.mp3")   
 
 
             elif "/berapa " in msg.text:
@@ -3172,7 +3246,24 @@ def bot(op):
                 msg.contentMetadata = {'mid': contact.mid}
                 nadya.sendMessage(msg)       
                 
-                
+            elif "Searchmid: " in msg.text:
+                saya = msg.text.replace("Checkmid: ","")
+                msg.contentType = 13
+                msg.contentMetadata = {"mid":saya}
+                cl.sendMessage(msg)
+                contact = cl.getContact(saya)
+                cu = cl.channel.getCover(saya)
+                path = str(cu)
+                image = "http://dl.profile.line-cdn.net/" + contact.pictureStatus
+                try:
+                    cl.sendText(msg.to,"Nama :\n" + contact.displayName + "\n\nBio :\n" + contact.statusMessage)
+                    cl.sendText(msg.to,"Profile Picture " + contact.displayName)
+                    cl.sendImageWithURL(msg.to,image)
+                    cl.sendText(msg.to,"Cover " + contact.displayName)
+                    cl.sendImageWithURL(msg.to,path)
+                except:
+                    pass
+            
             elif "removechat" in msg.text.lower():
                 if msg.from_ in admin:
                     try:
@@ -3286,7 +3377,74 @@ def bot(op):
             	gif = ("https://media.giphy.com/media/l2JHVsQiOZrNMGzYs/giphy.gif","https://media.giphy.com/media/OgltQ2hbilzJS/200w.gif")
                 gore = random.choice(gif)
                 nadya.sendGifWithURL(msg.to,gore)
+                
 
+                
+            elif ("Micadd " in msg.text):
+                targets = []
+                key = eval(msg.contentMetadata["MENTION"])
+                key["MENTIONEES"][0]["M"]
+                for x in key["MENTIONEES"]:
+                    targets.append(x["M"])
+                for target in targets:
+                    try:
+                        mimic["target"][target] = True
+                        nadya.sendText(msg.to,"Target ditambahkan!")
+                        break
+                    except:
+                        nadya.sendText(msg.to,"Fail !")
+                        break
+                    
+            elif ("Micdel " in msg.text):
+                targets = []
+                key = eval(msg.contentMetadata["MENTION"])
+                key["MENTIONEES"][0]["M"]
+                for x in key["MENTIONEES"]:
+                    targets.append(x["M"])
+                for target in targets:
+                    try:
+                        del mimic["target"][target]
+                        nadya.sendText(msg.to,"Target dihapuskan!")
+                        break
+                    except:
+                        nadya.sendText(msg.to,"Fail !")
+                        break
+                    
+            elif msg.text in ["Miclist"]:
+                        if mimic["target"] == {}:
+                            nadya.sendText(msg.to,"Nothing")
+                        else:
+                            mc = "Target Mimic User:\n"
+                            for mi_d in mimic["target"]:
+                                mc += "?? "+nadya.getContact(mi_d).displayName + "\n"
+                            nadya.sendText(msg.to,mc)
+
+            elif "Mimic target " in msg.text:
+                        if mimic["copy"] == True:
+                            siapa = msg.text.replace("Mimic target ","")
+                            if siapa.rstrip(' ') == "me":
+                                mimic["copy2"] = "me"
+                                nadya.sendText(msg.to,"Mimic change to me")
+                            elif siapa.rstrip(' ') == "target":
+                                mimic["copy2"] = "target"
+                                nadya.sendText(msg.to,"Mimic change to target")
+                            else:
+                                nadya.sendText(msg.to,"I dont know")
+            
+            elif "Mimic " in msg.text:
+                cmd = msg.text.replace("Mimic ","")
+                if cmd == "on":
+                    if mimic["status"] == False:
+                        mimic["status"] = True
+                        nadya.sendText(msg.to,"Reply Message on")
+                    else:
+                        nadya.sendText(msg.to,"Sudah on")
+                elif cmd == "off":
+                    if mimic["status"] == True:
+                        mimic["status"] = False
+                        nadya.sendText(msg.to,"Reply Message off")
+                    else:
+                        nadya.sendText(msg.to,"Sudah off")
 
 
 

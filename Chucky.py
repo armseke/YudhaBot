@@ -16,6 +16,8 @@ cl.login(token='isi token mu')
 cl.loginResult()
 print "=====[Sukses All Login]====="
 
+ki = kk = kc = kr = km = cl
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -1860,7 +1862,7 @@ def bot(op):
                 wait["Ghost"] = False
                 cl.sendText(msg.to,"Ghost Sudah Di Nonaktifkan")
 	     else:
-    	    cl.sendText(msg.to,"Khusus Yudha")	     
+    	            cl.sendText(msg.to,"Khusus Yudha")	     
 
             elif msg.text in ["Allprotect on"]:
 		if msg.from_ in admin:
@@ -1896,7 +1898,6 @@ def bot(op):
 		    print wait["AutoKick"]
 		    print wait["Qr"]
 		else:                    
-		else:
 		    cl.sendText(msg.to,"Khusus Yudha")
 
 

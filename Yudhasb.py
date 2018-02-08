@@ -62,7 +62,7 @@ botMessage ="""╔═════════════════
 ╠➩〘Mybackup〙
 ╠➩〘Mybio (Text)〙
 ╠➩〘Myname (Text)〙
-╠➩〘@bye〙
+╠➩〘@pamit〙
 ╠➩〘Bot on/off〙
 ╚═════════════════
 """
@@ -114,7 +114,7 @@ groupMessage ="""╔═════════════════
 ╠➩〘Viewseen〙
 ╠➩〘Gn: (NamaGroup)〙
 ╠➩〘Tag all〙
-╠➩〘Recover〙
+╠➩〘Rc〙
 ╠➩〘Cancel〙
 ╠➩〘Cancelall〙
 ╠➩〘Gcreator〙

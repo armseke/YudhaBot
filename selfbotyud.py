@@ -23,7 +23,7 @@ else:
     import urllib.parse
 
 yudha = yuda.LINE()
-yudha.login(token="Ep9sO4WjoHpnRU0tPoD3.e3js3/SAsD0pcXJS1rvp0W.xjxAGekPq84512h3OZ1d7OhpocIpIqQaA3fqYXuuCb8=")
+yudha.login(token="isi_token_mu")
 yudha.loginResult()
 
 print "========[Yudha Login Success]========="
